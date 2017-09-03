@@ -1,6 +1,6 @@
-# Bixlabs Kotlin Styleguide
+# Bixlabs Kotlin Styleguide and rules
 
-This page contains the current coding style for the Kotlin language.
+This page contains the current coding style for the Kotlin language and some rules we use to encourage a healthy development environment.
 
 ## Naming Style
 
@@ -93,6 +93,10 @@ Prefer a property over a function when the underlying algorithm:
 * has a `O(1)` complexity
 * is cheap to calculate (or caсhed on the first run)
 * returns the same result over invocations
+
+## Annotations:
+
+Since v1.0.6, Kotlin compiler does insert `@Nullable` and `@NotNull` from `org.jetbrains.annotations` in your code, so there's no need to manually add them to your methods. Nullability in Kotlin is inferred through the usage of `?` and optionals.
 
 ## apply
 
