@@ -101,7 +101,7 @@ Since v1.0.6, Kotlin compiler does insert `@Nullable` and `@NotNull` from `org.j
 
 ## apply
 
-Use `apply` for initialization:
+Use `apply` for initialization instead or repeating the same variable name over and over again.
 
 ```kotlin
 val foo = createBar().apply {
@@ -112,7 +112,7 @@ val foo = createBar().apply {
 
 ## also
 
-Use `also` over `apply` if the receiver is used for anything other than setting properties or function calls on it:
+Use `also` over `apply` if the receiver is used for anything other than setting properties or function calls on it.
 
 ```kotlin
 class Baz {
@@ -126,7 +126,7 @@ class Baz {
 }
 ```
 
-Prefer `also` over `apply` if there already are multiple receivers in scope, especially if you make calls on any outer receivers:
+Prefer `also` over `apply` if there already are multiple receivers in scope, especially if you make calls on any outer receivers.
 
 ```kotlin
 class Foo {
@@ -175,7 +175,7 @@ getNullable()?.apply {
 }
 ```
 
-Prefer `run/with` over apply if the returned value is not used
+Prefer `run/with` over apply if the returned value is not used.
 
 ```koltin
 view.run {
@@ -189,7 +189,7 @@ with(view) {
 }
 ```
 
-Choose one of the above and use it consistently.
+Choose one of the above and **use it consistently**.
 
 ## let
 
