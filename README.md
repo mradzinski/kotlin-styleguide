@@ -99,7 +99,7 @@ Prefer a property over a function when the underlying algorithm:
 Since v1.0.6, Kotlin compiler does insert `@Nullable` and `@NotNull` from `org.jetbrains.annotations` in your code, so there's no need to manually add them to your methods. Nullability in Kotlin is inferred through the usage of `?` and optionals.
 
 
-## apply
+## `apply`
 
 Use `apply` for initialization instead or repeating the same variable name over and over again.
 
@@ -110,7 +110,7 @@ val foo = createBar().apply {
 }
 ```
 
-## also
+## `also`
 
 Use `also` over `apply` if the receiver is used for anything other than setting properties or function calls on it.
 
@@ -161,7 +161,7 @@ class UsersDatabase : RoomDatabase() {
 }
 ```
 
-## apply/with/run
+## `apply`/`with`/`run`
 
 Prefer `apply/run` over `with` if the receiver is nullable.
 
@@ -191,7 +191,7 @@ with(view) {
 
 Choose one of the above and **use it consistently**.
 
-## let
+## `let`
 
 Prefer `let` over `run` in method chains that transform the receiver
 
@@ -210,7 +210,7 @@ val foo: List<String> = arrayOf("a", "b", "c")
 
 Prefer inmmutable `collection`s over mutable ones whenever you know the `collection` will not be mutated.
 
-## When
+## `when`
 Use `when` in case there are two or more branches of if-else
 
 ```kotlin
