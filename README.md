@@ -6,11 +6,15 @@ This page contains the current coding style for the Kotlin language.
 
 If in doubt, default to the Java Coding Conventions such as:
 
-* use of camelCase for names (and avoid underscore in names)
-* types start with upper case
-* methods and properties start with lower case
-* use 4 space indentation
-* public functions should have documentation such that it appears in Kotlin Doc
+* Hungarian notation is forbidden and I'll break your arms if I see you using it.
+* Use of camelCase for names (and avoid underscore in names unless for constants). 
+* Types start with upper case
+* Methods and properties start with lower case
+* Use 4 space indentation
+* Public functions should have documentation such that it appears in Kotlin Doc
+* Constants use uppercase letters with each word separated by an underscore: eg TXT_FILE_EXT
+* Classes/enums/objects use the title case naming scheme (well known abbreviations are permitted) and use singular nouns: eg StringFormatter, NOT StringFormatters
+* Avoid using reserved keywords for names
 
 ## Colon
 
@@ -30,13 +34,16 @@ In lambda expressions, spaces should be used around the curly braces, as well as
 list.filter { it > 10 }.map { element -> element * 2 }
 ```
 
-In lambdas which are short and not nested, it's recommended to use the it convention instead of declaring the parameter explicitly. In nested lambdas with parameters, parameters should be always declared explicitly.
+In lambdas which are short and not nested, use the `it` convention instead of declaring the parameter explicitly. In nested lambdas with parameters, parameters should be always declared explicitly.
 
 ## Class header formatting
 
 Classes with a few arguments can be written in a single line:
 
+```kotlin
 class Person(id: Int, name: String)
+```
+
 Classes with longer headers should be formatted so that each primary constructor argument is in a separate line with indentation. Also, the closing parenthesis should be on a new line. If we use inheritance, then the superclass constructor call or list of implemented interfaces should be located on the same line as the parenthesis:
 
 ```kotlin
@@ -63,6 +70,8 @@ class Person(
 ```
 
 Constructor parameters can use either the regular indent or the continuation indent (double the regular indent).
+
+Keep defined classes closed (omit the use of the **open** keyword) unless there is a good reason to open up a class and allow inheritance. Avoid API polution please.
 
 ## Unit
 
@@ -185,4 +194,75 @@ Prefer `let` over `run` in method chains that transform the receiver
 val baz: Baz = foo.let { createBar(it) }.convertBarToBaz()
 // or with function references
 val baz: Baz = foo.let(::createBar).convertBarToBaz()
+```
+
+## Array Initialization 
+Use the `arrayOf()` initializer without specifying the `<>` if the array type is already defined.
+
+```kotlin
+val foo: List<String> = arrayOf("a", "b", "c")
+```
+
+Prefer inmmutable `collection`s over mutable ones whenever you know the `collection` will not be mutated.
+
+## When
+Use `when` in case there are two or more branches of if-else
+
+```kotlin
+when {
+    foo > 10 -> print("10")
+    foo > 5 -> print("0")
+    foo > 0 -> print("0")
+    else -> print("else")
+}
+```
+
+Use `is` in case you are comparing a class type
+
+```kotlin
+val hoge: Hoge = Hoge()
+when (hoge) {
+    is Hoge -> {
+
+    }
+    else -> {
+       
+    }
+}
+```
+
+Use `range` in case you are comparing `Int` values
+
+```kotlin
+val hoge = 10
+when (hoge) {
+    in 0..4 -> print("0..4")
+    in 5..10 -> print("5..10")
+}
+```
+
+## Don't use `!!`
+
+Don't use `!!`, it will simply erase the benefits of Kotlin (Null-safety wise).
+You use it only when you want to explicitly raise a Null Pointer Exception or when you are **ABSOLUTELY** sure there's no chance of nullity (that means never).
+
+Use a scope function in case of checking a `null` value
+
+```kotlin
+class Hoge {
+    fun fun1() {}
+    fun fun2() {}
+    fun fun3() = true
+}
+
+var hoge: Hoge? = null
+
+hoge?.run { 
+   fun1()
+} ?: run {
+    hoge = Hoge().apply {
+        fun1()
+        fun2()
+    }
+}
 ```
