@@ -94,9 +94,10 @@ Prefer a property over a function when the underlying algorithm:
 * is cheap to calculate (or caсhed on the first run)
 * returns the same result over invocations
 
-## Annotations:
+## Annotations
 
 Since v1.0.6, Kotlin compiler does insert `@Nullable` and `@NotNull` from `org.jetbrains.annotations` in your code, so there's no need to manually add them to your methods. Nullability in Kotlin is inferred through the usage of `?` and optionals.
+
 
 ## apply
 
